@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Get the overlap between repeats and different gene compartments
-cd /data/rc003/lu/transcriptome/gene_expression_all/repeats_overlaps_genome/test
+cd /data/rc003/lu/transcriptome/gene_expression_all/repeats_overlaps_genome/intersect_data
+
 arr=( 'anolis' 'gal' 'mdo' 'oana' )
 
 # Extract gene compartments
@@ -22,6 +23,8 @@ do
     intersectBed -a utr5_$i -b ../bed_$i\_combine.map > overlap_$i\_utr5
     intersectBed -a cds_$i -b ../bed_$i\_combine.map > overlap_$i\_cds
     intersectBed -a intron_$i -b ../bed_$i\_combine.map > overlap_$i\_intron
+    intersectBed -a downstream_1kb_$i\_gene -b ../bed_$i\_combine.map > overlap_$i\_downstream_1kb
+    intersectBed -a upstream_1kb_$i\_gene -b ../bed_$i\_combine.map > overlap_$i\_upstream_1kb
 done
 
 
@@ -36,6 +39,8 @@ intersectBed -a utr3_bg -b ../bed_bg_combine.map > overlap_bg_utr3
 intersectBed -a utr5_bg -b ../bed_bg_combine.map > overlap_bg_utr5
 intersectBed -a cds_bg -b ../bed_bg_combine.map > overlap_bg_cds
 intersectBed -a intron_bg -b ../bed_bg_combine.map > overlap_bg_intron
+intersectBed -a downstream_1kb_bg -b ../bed_bg_combine.map > overlap_bg_downstream_1kb
+intersectBed -a upstream_1kb_bg -b ../bed_bg_combine.map > overlap_bg_upstream_1kb
 
 
 # The human 3'UTR, 5'UTR, upstream 1kb and downstream 1kb was downloaded from UCSC
@@ -46,5 +51,5 @@ intersectBed -a cds_hg -b ../bed_hg_combine.map > overlap_hg_cds
 intersectBed -a intron_hg -b ../bed_hg_combine.map > overlap_hg_intron
 intersectBed -a Gene_regions/utr3_exon_hg -b ../bed_hg_combine.map > overlap_hg_utr3_exon
 intersectBed -a Gene_regions/utr5_exon_hg -b ../bed_hg_combine.map > overlap_hg_utr5_exon
-intersectBed -a Gene_regions/upstream_1kb_hg -b ../bed_hg_combine.map > overlap_hg_upstream
-intersectBed -a Gene_regions/downstream_1kb_hg -b ../bed_hg_combine.map > overlap_hg_downstream
+intersectBed -a Gene_regions/upstream_1kb_hg -b ../bed_hg_combine.map > overlap_hg_upstream_1kb
+intersectBed -a Gene_regions/downstream_1kb_hg -b ../bed_hg_combine.map > overlap_hg_downstream_1kb
